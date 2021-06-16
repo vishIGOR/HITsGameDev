@@ -644,7 +644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629453766}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 414, y: 260.8, z: 499.66}
+  m_LocalPosition: {x: 413.9, y: 260.8, z: 499.66}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfGDA: 1
-  directionOfGDA: 6
+  directionOfGDA: 2
   player: {fileID: 763315787}
 --- !u!135 &1109861372
 SphereCollider:
