@@ -93,11 +93,6 @@ public class PlayerControl : MonoBehaviour
 
     private void CameraControl()
     {
-        if (inRotating)
-        {
-            inRotating = false;
-            return;
-        }
         r = Input.GetAxis("Horizontal");
         f = Input.GetAxis("Vertical");
 
@@ -207,10 +202,8 @@ public class PlayerControl : MonoBehaviour
                 break;
         }
 
-        Testing(currentSpeed * currentCos * f + currentSpeed * -currentSin * r);
-        Testing(currentSpeed * currentSin * f + currentSpeed * currentCos * r);
-
-        Testing2(Mathf.Sqrt(mainRigidbody.velocity.x * mainRigidbody.velocity.x + mainRigidbody.velocity.z * mainRigidbody.velocity.z + mainRigidbody.velocity.y * mainRigidbody.velocity.y));
+        // спидометр)))
+        /*Testing2(Mathf.Sqrt(mainRigidbody.velocity.x * mainRigidbody.velocity.x + mainRigidbody.velocity.z * mainRigidbody.velocity.z + mainRigidbody.velocity.y * mainRigidbody.velocity.y));*/
 
         mainRigidbody.AddForce(directionForward * currentSpeed * currentCos * f, ForceMode.VelocityChange);
         mainRigidbody.AddForce(directionForward * currentSpeed * -currentSin * r, ForceMode.VelocityChange);

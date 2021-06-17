@@ -6,7 +6,7 @@ public class GravityDistortionArtifact : MonoBehaviour
 {
     private Collider gravityArea;
     private Rigidbody GDArb;
-    private float gravityRadius= 25;
+    private float gravityRadius = 25;
 
     private float xGravityForce;
     private float yGravityForce;
@@ -33,6 +33,13 @@ public class GravityDistortionArtifact : MonoBehaviour
     //значение гравитационного ускорения
     private const float forceValue = 0.1962F;
     private Vector3 zeroVelocity = new Vector3(0, 0, 0);
+
+    private float rotationStartTime;
+    private Vector3 previousAngles;
+    private Vector3 newAngles;
+    private bool isRotationActive = false;
+    private float rotationDuration = 0.6f;
+
     void Start()
     {
         rotationByX[1] = 0;
@@ -40,7 +47,7 @@ public class GravityDistortionArtifact : MonoBehaviour
         rotationByZ[1] = 0;
 
         rotationByX[2] = -180;
-        rotationByY[2] = 0;
+        rotationByY[2] = 180;
         rotationByZ[2] = 0;
 
         rotationByX[3] = 0;
@@ -62,12 +69,15 @@ public class GravityDistortionArtifact : MonoBehaviour
         gravityArea = GetComponent<Collider>();
         gravityArea.isTrigger = true;
 
+
         GDArb = GetComponent<Rigidbody>();
+
+        /////////////////////////////////////////////// эту строчку нужно удалить после создания функции броска
         GDArb.velocity = new Vector3(0, 1f, 0);
     }
     void Update()
     {
-
+        PlayerRotation(isRotationActive);
     }
 
     void FixedUpdate()
@@ -134,14 +144,14 @@ public class GravityDistortionArtifact : MonoBehaviour
         {
             if (other.attachedRigidbody)
             {
-                if(other.gameObject == player.gameObject || other.gameObject == player.head.gameObject)
+                if (other.gameObject == player.gameObject || other.gameObject == player.head.gameObject)
                 {
                     if (player.isInGDA != numberOfGDA)
                         continue;
                 }
                 other.attachedRigidbody.useGravity = false;
                 other.attachedRigidbody.AddForce(xGravityForce, yGravityForce, zGravityForce, ForceMode.VelocityChange);
-                
+
             }
         }
     }
@@ -150,12 +160,12 @@ public class GravityDistortionArtifact : MonoBehaviour
     {
         if (isSetted == false)
             return;
-        
+
         if (other.gameObject == player.gameObject)
         {
             playerEnter();
         }
-            
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -174,7 +184,7 @@ public class GravityDistortionArtifact : MonoBehaviour
 
     private void playerEnter()
     {
-        gravityInversion(directionOfGDA,numberOfGDA);
+        gravityInversion(directionOfGDA, numberOfGDA);
     }
 
     private void playerExit()
@@ -186,30 +196,65 @@ public class GravityDistortionArtifact : MonoBehaviour
         gravityInversion(1, 0);
     }
 
-    private void gravityInversion(int newDirection,int newNumber)
+    private void gravityInversion(int newDirection, int newNumber)
     {
         int previousDirection = player.GDADirection;
         player.GDADirection = newDirection;
         player.isInGDA = newNumber;
 
-        player.gorizontalAngle = 0;
-
+        float previousGorizontalAngle = player.gorizontalAngle;
         /*body.localEulerAngles = new Vector3(body.transform.rotation.x, rotationGorizontal, body.transform.rotation.z);*/
 
-        player.inRotating = true;
-        player.transform.localEulerAngles = new Vector3(rotationByX[newDirection], rotationByY[newDirection], rotationByZ[newDirection]);
-        /*player.mainRigidbody.freezeRotation = false;
-        player.transform.Rotate(0, 90, -90);
-        player.mainRigidbody.freezeRotation = true;*/
-        /*player.body.transform.rotation.x = rotationByX[newDirection];*/
+        previousAngles = player.transform.eulerAngles;
 
-        /*Debug.Log(rotationByX[newDirection]);
-        Debug.Log(rotationByY[newDirection]);
-        Debug.Log(rotationByZ[newDirection]);*/
+        player.inRotating = true;
+        player.transform.eulerAngles = new Vector3(rotationByX[newDirection], rotationByY[newDirection], rotationByZ[newDirection]);
+
+        if (Mathf.Abs(newDirection / 2 - previousDirection / 2) == 1)
+        {
+            Debug.Log("test");
+            player.body.Rotate(0, -player.gorizontalAngle, 0);
+            player.gorizontalAngle = -player.gorizontalAngle;
+        }
+        else
+        {
+            player.body.Rotate(0, player.gorizontalAngle, 0);
+        }
+
+
+        newAngles = player.transform.eulerAngles;
+        player.transform.eulerAngles = previousAngles;
+        isRotationActive = true;
+        rotationStartTime = -42f;
 
         if (newNumber != 0)
             player.GetComponent<Rigidbody>().useGravity = false;
         else
             player.GetComponent<Rigidbody>().useGravity = true;
+    }
+
+    private void PlayerRotation(bool isActive)
+    {
+        if (!isActive)
+            return;
+
+        if (rotationStartTime == -42f)
+        {
+            rotationStartTime = Time.time;
+        }
+
+        if (Time.time - rotationStartTime >= rotationDuration)
+        {
+            isRotationActive = false;
+            return;
+        }
+
+        float t = (Time.time - rotationStartTime) / rotationDuration;
+        Vector3 currentAngles;
+        currentAngles.x = Mathf.SmoothStep(previousAngles.x, newAngles.x, t);
+        currentAngles.y = Mathf.SmoothStep(previousAngles.y, newAngles.y, t);
+        currentAngles.z = Mathf.SmoothStep(previousAngles.z, newAngles.z, t);
+
+        player.transform.eulerAngles = currentAngles;
     }
 }
