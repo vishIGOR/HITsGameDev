@@ -6,7 +6,7 @@ public class GravityDistortionArtifact : MonoBehaviour
 {
     private Collider gravityArea;
     private Rigidbody GDArb;
-    private float gravityRadius = 25;
+    public float gravityRadius = 20;
 
     private float xGravityForce;
     private float yGravityForce;
