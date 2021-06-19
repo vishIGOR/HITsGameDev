@@ -12,8 +12,15 @@ public class GDAModel : MonoBehaviour
         model = transform.gameObject;
         GDArb = model.transform.parent.GetComponent<Rigidbody>();
     }
-    private void OnCollisionEnter()
+
+    private void OnCollisionEnter(Collision other)
     {
+        if (other.collider.tag == "Player" || other.collider.tag == "GDArtifact")
+        {
+            Debug.Log("test");
+            return;
+        }
+            
         GDArb.isKinematic = true;
         model.GetComponent<Rigidbody>().isKinematic = true;
     }

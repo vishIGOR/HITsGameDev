@@ -224,7 +224,6 @@ public class GravityDistortionArtifact : MonoBehaviour
 
         if (Mathf.Abs(newDirection / 2 - previousDirection / 2) == 1)
         {
-            Debug.Log("test");
             player.body.Rotate(0, -player.gorizontalAngle, 0);
             player.gorizontalAngle = -player.gorizontalAngle;
         }
