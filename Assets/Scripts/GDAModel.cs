@@ -13,6 +13,11 @@ public class GDAModel : MonoBehaviour
         GDArb = model.transform.parent.GetComponent<Rigidbody>();
     }
 
+    void Update()
+    {
+        transform.localPosition = new Vector3(0, 0, 0);
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.collider.tag == "Player" || other.collider.tag == "GDArtifact")
