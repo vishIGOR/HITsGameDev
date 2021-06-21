@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class GDAModel : MonoBehaviour
 {
-    public GameObject model;
+    private GameObject model;
     private Rigidbody GDArb;
+    private float speed;
     void Start()
     {
+        model = transform.gameObject;
         GDArb = model.transform.parent.GetComponent<Rigidbody>();
-    }
-    private void OnCollisionEnter()
-    {
-        GDArb.isKinematic = true;
-        model.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     void Update()
     {
+        transform.localPosition = new Vector3(0, 0, 0);
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.tag == "Player" || other.collider.tag == "GDArtifact")
+        {
+            return;
+        }
+            
+        GDArb.isKinematic = true;
+        model.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
 }

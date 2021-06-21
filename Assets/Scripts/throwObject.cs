@@ -8,7 +8,7 @@ namespace Chapter1
     {
         public GameObject objectPrefab;
         private Transform myTransform;
-        private float propulsionForce = 7;
+        private float propulsionForce = 10;
 
         // Start is called before the first frame update
         void Start()
@@ -31,7 +31,6 @@ namespace Chapter1
         void SpawnObject()
         {
             GameObject go = (GameObject)Instantiate(objectPrefab, myTransform.TransformPoint(0, 0, 0.5f),myTransform.rotation);
-            //GameObject go = (GameObject)Instantiate(objectPrefab, myTransform.TransformPoint(0, 0, 0.5f), Quaternion.Euler(myTransform.rotation.x, myTransform.rotation.y+30f, myTransform.rotation.z));
             go.GetComponent<Rigidbody>().AddForce(myTransform.forward * propulsionForce, ForceMode.VelocityChange);
         }
     }
