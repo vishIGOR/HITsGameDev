@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Chapter1
-{
-    public class throwObject : MonoBehaviour
+public class throwObject : MonoBehaviour
     {
         public GameObject objectPrefab;
         private Transform myTransform;
@@ -35,4 +33,3 @@ namespace Chapter1
         }
     }
 
-}
