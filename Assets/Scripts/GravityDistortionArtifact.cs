@@ -238,6 +238,40 @@ public class GravityDistortionArtifact : MonoBehaviour
         isRotationActive = true;
         rotationStartTime = -42f;
 
+        if (Mathf.Abs(newAngles.x - previousAngles.x) > 180)
+        {
+            if (previousAngles.x < 0)
+            {
+                previousAngles.x += 360;
+            }
+            else
+            {
+                newAngles.x += 360;
+            }
+        }
+        if (Mathf.Abs(newAngles.y - previousAngles.y) > 180)
+        {
+            if (previousAngles.y < 0)
+            {
+                previousAngles.y += 360;
+            }
+            else
+            {
+                newAngles.y += 360;
+            }
+        }
+        if (Mathf.Abs(newAngles.z - previousAngles.z) > 180)
+        {
+            if (previousAngles.z < 0)
+            {
+                previousAngles.z += 360;
+            }
+            else
+            {
+                newAngles.z += 360;
+            }
+        }
+
         if (newNumber != 0)
             player.GetComponent<Rigidbody>().useGravity = false;
         else

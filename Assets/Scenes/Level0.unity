@@ -613,6 +613,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1577814635}
+  player: {fileID: 744075214}
+  playerHead: {fileID: 452478387}
 --- !u!4 &72579813 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 417994, guid: eefa18c7aee7d324eb1d4af38eafc25a, type: 3}
