@@ -4664,8 +4664,8 @@ MonoBehaviour:
   head: {fileID: 452478388}
   body: {fileID: 744075220}
   sensitivity: 4
-  headMinY: -55
-  headMaxY: 55
+  headMinY: -70
+  headMaxY: 70
   jumpButton: 32
   runningButton: 304
   jumpForce: 5
