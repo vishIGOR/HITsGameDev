@@ -17,7 +17,7 @@ public class DoorBehaviour : MonoBehaviour
     private Vector3 previousRightDoorPosition;
     private Vector3 newRightDoorPosition;
     private float startTime;
-    private float durationTime = 0.6f;
+    private float durationTime = 1f;
 
     void Start()
     {
@@ -25,7 +25,6 @@ public class DoorBehaviour : MonoBehaviour
         leftDoor = transform.Find("LeftDoor").gameObject;
         rightDoor = transform.Find("RightDoor").gameObject;
 
-        isActive = true;
         doorsPosition = false;
     }
 
