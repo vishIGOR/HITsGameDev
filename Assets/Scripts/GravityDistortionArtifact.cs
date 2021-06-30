@@ -95,15 +95,16 @@ public class GravityDistortionArtifact : MonoBehaviour
             {
                 GDArb.velocity = zeroVelocity;
                 isSetted = true;
-                activationGDA();
+                ActivationGDA();
             }
         }
         else
         {
-            gravityDistortion(transform.position, gravityRadius);
+            GravityDistortion(transform.position, gravityRadius);
         }
     }
 
+<<<<<<< HEAD
     public void setVale()
     {
         scr = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
@@ -111,6 +112,15 @@ public class GravityDistortionArtifact : MonoBehaviour
     }
     private void activationGDA()
     {
+=======
+    public void SetValue()
+    {
+        scr = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
+        directionOfGDA = (int)Math.Round(scr.value*5+1); 
+    }
+    private void ActivationGDA()
+    {
+>>>>>>> VishIGOR2
         //потом здесь будет ввод данных
         
 
@@ -148,7 +158,7 @@ public class GravityDistortionArtifact : MonoBehaviour
                 break;
         }
     }
-    private void gravityDistortion(Vector3 center, float radius)
+    private void GravityDistortion(Vector3 center, float radius)
     {
 
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
@@ -156,11 +166,6 @@ public class GravityDistortionArtifact : MonoBehaviour
         {
             if (other.attachedRigidbody)
             {
-                if (other.gameObject == player.gameObject || other.gameObject == player.head.gameObject)
-                {
-                    if (player.isInGDA != numberOfGDA)
-                        continue;
-                }
                 other.attachedRigidbody.useGravity = false;
                 other.attachedRigidbody.AddForce(xGravityForce, yGravityForce, zGravityForce, ForceMode.VelocityChange);
 
@@ -175,7 +180,7 @@ public class GravityDistortionArtifact : MonoBehaviour
 
         if (other.gameObject == player.gameObject)
         {
-            playerEnter();
+            PlayerEnter();
         }
 
     }
@@ -186,7 +191,7 @@ public class GravityDistortionArtifact : MonoBehaviour
             return;
         if (other.gameObject == player.gameObject)
         {
-            playerExit();
+            PlayerExit();
             return;
         }
         if (other.GetComponent<Rigidbody>())
@@ -194,21 +199,21 @@ public class GravityDistortionArtifact : MonoBehaviour
 
     }
 
-    private void playerEnter()
+    private void PlayerEnter()
     {
-        gravityInversion(directionOfGDA, numberOfGDA);
+        GravityInversion(directionOfGDA, numberOfGDA);
     }
 
-    private void playerExit()
+    private void PlayerExit()
     {
 
         if (player.isInGDA != numberOfGDA)
             return;
 
-        gravityInversion(1, 0);
+        GravityInversion(1, 0);
     }
 
-    private void gravityInversion(int newDirection, int newNumber)
+    private void GravityInversion(int newDirection, int newNumber)
     {
         int previousDirection = player.GDADirection;
         player.GDADirection = newDirection;

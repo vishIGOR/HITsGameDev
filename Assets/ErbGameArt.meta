@@ -1,7 +1,18 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/ErbGameArt.meta
 guid: bd4e830fc3e4e6343b3c58b09e105fe0
 folderAsset: yes
 DefaultImporter:
+=======
+guid: c75d2d4a8f8817842ab5907c0246167e
+PrefabImporter:
+>>>>>>> VishIGOR2:Assets/Prefabs/BoxCreator.prefab.meta
+=======
+guid: bd4e830fc3e4e6343b3c58b09e105fe0
+folderAsset: yes
+DefaultImporter:
+>>>>>>> VishIGOR2
   externalObjects: {}
   userData: 
   assetBundleName: 
