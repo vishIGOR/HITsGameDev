@@ -21,7 +21,7 @@ public class PutOnGlasses : MonoBehaviour
         pauseScript.Pause();
         glasses.SetActive(true);
         glassesOut.SetActive(false);
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(0.9f);
         bluePanel.SetActive(true);
     }
 
