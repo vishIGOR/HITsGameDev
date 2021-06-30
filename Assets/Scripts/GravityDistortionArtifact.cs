@@ -26,7 +26,7 @@ public class GravityDistortionArtifact : MonoBehaviour
     public int directionOfGDA = 1;
 
     private PlayerControl player;
-    private Scrollbar scr;
+    private Slider scr;
 
     //1 - вдоль оси y, голова по оси
     //2 - вдоль оси y, голова против оси
@@ -106,7 +106,7 @@ public class GravityDistortionArtifact : MonoBehaviour
 
     public void setVale()
     {
-        scr = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
+        scr = GameObject.Find("Slider").GetComponent<Slider>();
         directionOfGDA = (int)Math.Round(scr.value*5+1); 
     }
     private void activationGDA()
