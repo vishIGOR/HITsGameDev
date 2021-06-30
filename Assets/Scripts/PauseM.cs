@@ -61,11 +61,18 @@ public class PauseM : MonoBehaviour
         thr.enabled = true;
         Cursor.visible = false;
     }
+    public void ContinueGame()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        contr.enabled = true;
+        thr.enabled = true;
+        Cursor.visible = false;
+    }
     public void Pause()
     {
         contr.enabled = false;
         thr.enabled = false;
         Cursor.visible = true;
-
     }
 }
