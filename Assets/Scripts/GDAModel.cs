@@ -22,10 +22,6 @@ public class GDAModel : MonoBehaviour
     {
         if (other.collider.tag == "Player" || other.collider.tag == "GDArtifact")
         {
-<<<<<<< HEAD
-            Debug.Log("test");
-=======
->>>>>>> VishIGOR2
             return;
         }
             

@@ -927,5 +927,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  boxPrefab: {fileID: 8279474086681065637, guid: 8ed70f6c5a42dc343a35e47e842ff107, type: 3}
+  boxPrefab: {fileID: 8279474086681065637, guid: 2c08324df6da3fd498d2e076ff224d9b, type: 3}
   linkedBox: {fileID: 0}

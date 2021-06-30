@@ -104,15 +104,7 @@ public class GravityDistortionArtifact : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-    public void setVale()
-    {
-        scr = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
-        directionOfGDA = (int)Math.Round(scr.value*5+1); 
-    }
-    private void activationGDA()
-    {
-=======
+
     public void SetValue()
     {
         scr = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
@@ -120,10 +112,6 @@ public class GravityDistortionArtifact : MonoBehaviour
     }
     private void ActivationGDA()
     {
->>>>>>> VishIGOR2
-        //потом здесь будет ввод данных
-        
-
         switch (directionOfGDA)
         {
             case 1:

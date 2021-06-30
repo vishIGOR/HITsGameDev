@@ -7,8 +7,6 @@ public class PauseM : MonoBehaviour
 {
     static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-<<<<<<< HEAD
-=======
     PlayerControl contr;
     throwObject thr;
     public GameObject player;
@@ -19,7 +17,6 @@ public class PauseM : MonoBehaviour
         thr = playerHead.GetComponent<throwObject>();
 
     }
->>>>>>> VishIGOR2
     void Update()
     {
         if (Input.GetKeyDown("escape"))
@@ -30,15 +27,12 @@ public class PauseM : MonoBehaviour
 
         }
     }
-<<<<<<< HEAD
-=======
     public void LoadScene(int level)
     {
         GameIsPaused = !GameIsPaused;
         SceneManager.LoadScene(level);
 
     }
->>>>>>> VishIGOR2
     public void Resume()
     {
         contr.enabled = true;
@@ -47,18 +41,13 @@ public class PauseM : MonoBehaviour
         Cursor.visible = false;
         Time.timeScale = 1f;
     }
-<<<<<<< HEAD
-     void Pause()
-    {
-        pauseMenuUI.SetActive(true);
-=======
+
     void Pause()
     {
         contr.enabled = false;
         thr.enabled = false;
         pauseMenuUI.SetActive(true);
         Cursor.visible = true;
->>>>>>> VishIGOR2
         Time.timeScale = 0f;
 
     }
