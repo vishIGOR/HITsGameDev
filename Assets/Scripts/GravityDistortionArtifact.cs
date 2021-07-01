@@ -161,6 +161,12 @@ public class GravityDistortionArtifact : MonoBehaviour
                     if (player.isInGDA != numberOfGDA)
                         continue;
                 }
+
+                if (other.tag == "GDArtifact")
+                {
+                    continue;
+                }
+
                 other.attachedRigidbody.useGravity = false;
                 other.attachedRigidbody.AddForce(xGravityForce, yGravityForce, zGravityForce, ForceMode.VelocityChange);
 
