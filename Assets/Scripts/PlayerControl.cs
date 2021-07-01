@@ -1,6 +1,9 @@
-using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+ 
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerControl : MonoBehaviour
@@ -12,14 +15,14 @@ public class PlayerControl : MonoBehaviour
     public Transform head;
     public Transform body;
 
-    public float sensitivity = 5f; // ÷óâñòâèòåëüíîñòü ìûøè
-    public float headMinY = -40f; // îãðàíè÷åíèå óãëà äëÿ ãîëîâû
+    public float sensitivity = 5f; // чувствительность мыши
+    public float headMinY = -40f; // ограничение угла для головы
     public float headMaxY = 40f;
 
     public KeyCode jumpButton = KeyCode.Space;
-    public KeyCode runningButton = KeyCode.LeftShift;// êëàâèøà äëÿ ïðûæêà
-    public float jumpForce = 5f; // ñèëà ïðûæêà
-    public float jumpDistance = 1.05f; // ðàññòîÿíèå îò öåíòðà îáúåêòà, äî ïîâåðõíîñòè
+    public KeyCode runningButton = KeyCode.LeftShift;// клавиша для прыжка
+    public float jumpForce = 5f; // сила прыжка
+    public float jumpDistance = 1.05f; // расстояние от центра объекта, до поверхности
 
     public Rigidbody mainRigidbody;
 
@@ -29,6 +32,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 worldLeft = new Vector3(-1, 0, 0);
     private Vector3 worldBack = new Vector3(0, 0, -1);
     private Vector3 worldDown = new Vector3(0, -1, 0);
+    private Scrollbar scr;
 
     private Vector3 directionRight;
     private Vector3 directionForward;
@@ -90,6 +94,11 @@ public class PlayerControl : MonoBehaviour
         CameraControl();
         Jumping();
     }
+   public void setValue()
+    {
+        scr = GameObject.Find("ScrollbarSens").GetComponent<Scrollbar>();
+        sensitivity = (int)Math.Round(scr.value*12.5); 
+    } 
 
     private void CameraControl()
     {
@@ -202,7 +211,7 @@ public class PlayerControl : MonoBehaviour
                 break;
         }
 
-        // ñïèäîìåòð)))
+        // спидометр)))
         /*Testing2(Mathf.Sqrt(mainRigidbody.velocity.x * mainRigidbody.velocity.x + mainRigidbody.velocity.z * mainRigidbody.velocity.z + mainRigidbody.velocity.y * mainRigidbody.velocity.y));*/
 
         mainRigidbody.AddForce(directionForward * currentSpeed * currentCos * f, ForceMode.VelocityChange);
@@ -210,7 +219,7 @@ public class PlayerControl : MonoBehaviour
 
         mainRigidbody.AddForce(directionRight * currentSpeed * currentSin * f, ForceMode.VelocityChange);
         mainRigidbody.AddForce(directionRight * currentSpeed * currentCos * r, ForceMode.VelocityChange);
-        // Îãðàíè÷åíèå ñêîðîñòè, èíà÷å îáúåêò áóäåò ïîñòîÿííî óñêîðÿòüñÿ
+        // Ограничение скорости, иначе объект будет постоянно ускоряться
 
         if (forwardVelocity - Mathf.Abs(currentSpeed * currentCos * f + currentSpeed * -currentSin * r) > 0)
         {

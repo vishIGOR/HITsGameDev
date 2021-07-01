@@ -95,23 +95,25 @@ public class GravityDistortionArtifact : MonoBehaviour
             {
                 GDArb.velocity = zeroVelocity;
                 isSetted = true;
-                ActivationGDA();
+                activationGDA();
             }
         }
         else
         {
-            GravityDistortion(transform.position, gravityRadius);
+            gravityDistortion(transform.position, gravityRadius);
         }
     }
 
-
-    public void SetValue()
+    public void setVale()
     {
         scr = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
         directionOfGDA = (int)Math.Round(scr.value*5+1); 
     }
-    private void ActivationGDA()
+    private void activationGDA()
     {
+        //потом здесь будет ввод данных
+        
+
         switch (directionOfGDA)
         {
             case 1:
@@ -146,7 +148,7 @@ public class GravityDistortionArtifact : MonoBehaviour
                 break;
         }
     }
-    private void GravityDistortion(Vector3 center, float radius)
+    private void gravityDistortion(Vector3 center, float radius)
     {
 
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
@@ -154,6 +156,11 @@ public class GravityDistortionArtifact : MonoBehaviour
         {
             if (other.attachedRigidbody)
             {
+                if (other.gameObject == player.gameObject || other.gameObject == player.head.gameObject)
+                {
+                    if (player.isInGDA != numberOfGDA)
+                        continue;
+                }
                 other.attachedRigidbody.useGravity = false;
                 other.attachedRigidbody.AddForce(xGravityForce, yGravityForce, zGravityForce, ForceMode.VelocityChange);
 
@@ -168,7 +175,7 @@ public class GravityDistortionArtifact : MonoBehaviour
 
         if (other.gameObject == player.gameObject)
         {
-            PlayerEnter();
+            playerEnter();
         }
 
     }
@@ -179,7 +186,7 @@ public class GravityDistortionArtifact : MonoBehaviour
             return;
         if (other.gameObject == player.gameObject)
         {
-            PlayerExit();
+            playerExit();
             return;
         }
         if (other.GetComponent<Rigidbody>())
@@ -187,21 +194,21 @@ public class GravityDistortionArtifact : MonoBehaviour
 
     }
 
-    private void PlayerEnter()
+    private void playerEnter()
     {
-        GravityInversion(directionOfGDA, numberOfGDA);
+        gravityInversion(directionOfGDA, numberOfGDA);
     }
 
-    private void PlayerExit()
+    private void playerExit()
     {
 
         if (player.isInGDA != numberOfGDA)
             return;
 
-        GravityInversion(1, 0);
+        gravityInversion(1, 0);
     }
 
-    private void GravityInversion(int newDirection, int newNumber)
+    private void gravityInversion(int newDirection, int newNumber)
     {
         int previousDirection = player.GDADirection;
         player.GDADirection = newDirection;
@@ -231,40 +238,6 @@ public class GravityDistortionArtifact : MonoBehaviour
         isRotationActive = true;
         rotationStartTime = -42f;
 
-        if (Mathf.Abs(newAngles.x - previousAngles.x) > 180)
-        {
-            if (previousAngles.x < 0)
-            {
-                previousAngles.x += 360;
-            }
-            else
-            {
-                newAngles.x += 360;
-            }
-        }
-        if (Mathf.Abs(newAngles.y - previousAngles.y) > 180)
-        {
-            if (previousAngles.y < 0)
-            {
-                previousAngles.y += 360;
-            }
-            else
-            {
-                newAngles.y += 360;
-            }
-        }
-        if (Mathf.Abs(newAngles.z - previousAngles.z) > 180)
-        {
-            if (previousAngles.z < 0)
-            {
-                previousAngles.z += 360;
-            }
-            else
-            {
-                newAngles.z += 360;
-            }
-        }
-
         if (newNumber != 0)
             player.GetComponent<Rigidbody>().useGravity = false;
         else
@@ -289,8 +262,6 @@ public class GravityDistortionArtifact : MonoBehaviour
 
         float t = (Time.time - rotationStartTime) / rotationDuration;
         Vector3 currentAngles;
-
-        
         currentAngles.x = Mathf.SmoothStep(previousAngles.x, newAngles.x, t);
         currentAngles.y = Mathf.SmoothStep(previousAngles.y, newAngles.y, t);
         currentAngles.z = Mathf.SmoothStep(previousAngles.z, newAngles.z, t);

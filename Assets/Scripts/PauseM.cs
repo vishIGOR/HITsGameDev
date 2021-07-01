@@ -7,12 +7,15 @@ public class PauseM : MonoBehaviour
 {
     static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
     PlayerControl contr;
     throwObject thr;
     public GameObject player;
     public GameObject playerHead;
 
-    void Start(){
+
+    void Start()
+    {
         contr = player.GetComponent<PlayerControl>();
         thr = playerHead.GetComponent<throwObject>();
 
@@ -21,8 +24,18 @@ public class PauseM : MonoBehaviour
     {
         if (Input.GetKeyDown("escape"))
         {
-            if (GameIsPaused) { Resume(); }
-            else { Pause(); }
+            if (GameIsPaused)
+            {
+                pauseMenuUI.SetActive(false);
+                Time.timeScale = 1f;
+                Resume();
+            }
+            else
+            {
+                pauseMenuUI.SetActive(true);
+                Time.timeScale = 0f;
+                Pause();
+            }
             GameIsPaused = !GameIsPaused;
 
         }
@@ -31,24 +44,35 @@ public class PauseM : MonoBehaviour
     {
         GameIsPaused = !GameIsPaused;
         SceneManager.LoadScene(level);
-
+    }
+    public void ChangeSettings()
+    {
+        pauseMenuUI.SetActive(false);
+        settingsMenuUI.SetActive(true);
+    }
+    public void ReturnBack()
+    {
+        pauseMenuUI.SetActive(true);
+        settingsMenuUI.SetActive(false);
     }
     public void Resume()
     {
         contr.enabled = true;
         thr.enabled = true;
-        pauseMenuUI.SetActive(false);
         Cursor.visible = false;
-        Time.timeScale = 1f;
     }
-
-    void Pause()
+    public void ContinueGame()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        contr.enabled = true;
+        thr.enabled = true;
+        Cursor.visible = false;
+    }
+    public void Pause()
     {
         contr.enabled = false;
         thr.enabled = false;
-        pauseMenuUI.SetActive(true);
         Cursor.visible = true;
-        Time.timeScale = 0f;
-
     }
 }
