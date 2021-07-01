@@ -8,7 +8,7 @@ public class GravityDistortionArtifact : MonoBehaviour
 {
     private Collider gravityArea;
     private Rigidbody GDArb;
-    public float gravityRadius = 2;
+    public float gravityRadius;
 
     private float xGravityForce;
     private float yGravityForce;
@@ -164,7 +164,8 @@ public class GravityDistortionArtifact : MonoBehaviour
 
                 if (other.tag == "GDArtifact")
                 {
-                    continue;
+                    if ((other.transform.position - transform.position).sqrMagnitude > gravityRadius * gravityRadius)
+                        continue;
                 }
 
                 other.attachedRigidbody.useGravity = false;
