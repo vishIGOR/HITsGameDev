@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GDATrigger : MonoBehaviour
 {
     public GameObject GDAModel;
-    public GameObject NextLearn;
     public GameObject Learn;
     public GameObject num0;
     public GameObject num1;
@@ -16,13 +15,14 @@ public class GDATrigger : MonoBehaviour
     void Start()
     {
         numOfMaxArtText = num1.GetComponent<Text>();
-        numOfMaxArtText.enabled = false; 
+        numOfMaxArtText.enabled = false;
     }
-    
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
+            Cursor.visible = true;
             numOfMaxArtText.enabled = true;
             num0.SetActive(false);
             PressU.SetActive(false);

@@ -75,7 +75,7 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-
+        Cursor.visible = false;
         directionForward = worldForward;
         directionRight = worldRight;
         isInGDA = 0;

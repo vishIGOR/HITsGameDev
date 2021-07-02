@@ -3710,7 +3710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 9046188598952479647, guid: 9d88219defe2b8a42b0c2a333f901a3b, type: 3}
   message: {fileID: 1936297089}
-  maximumOfArtifacts: 0
+  maximumOfArtifacts: 1
   numOfArtifacts: 0
 --- !u!1 &469655003
 GameObject:
