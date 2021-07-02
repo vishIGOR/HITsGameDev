@@ -8,7 +8,7 @@ public class GravityDistortionArtifact : MonoBehaviour
 {
     private Collider gravityArea;
     private Rigidbody GDArb;
-    public float gravityRadius = 2;
+    public float gravityRadius;
 
     private float xGravityForce;
     private float yGravityForce;
@@ -107,12 +107,12 @@ public class GravityDistortionArtifact : MonoBehaviour
     public void setVale()
     {
         scr = GameObject.Find("Slider").GetComponent<Slider>();
-        directionOfGDA = (int)Math.Round(scr.value); 
+        directionOfGDA = (int)Math.Round(scr.value);
     }
     private void activationGDA()
     {
         //потом здесь будет ввод данных
-        
+
 
         switch (directionOfGDA)
         {
@@ -131,7 +131,7 @@ public class GravityDistortionArtifact : MonoBehaviour
                 yGravityForce = 0;
                 zGravityForce = 0;
                 break;
-            case 4: 
+            case 4:
                 xGravityForce = forceValue;
                 yGravityForce = 0;
                 zGravityForce = 0;
@@ -159,6 +159,12 @@ public class GravityDistortionArtifact : MonoBehaviour
                 if (other.gameObject == player.gameObject || other.gameObject == player.head.gameObject)
                 {
                     if (player.isInGDA != numberOfGDA)
+                        continue;
+                }
+                if (other.tag == "GDArtifact")
+                {
+                    continue;
+                    if ((other.transform.position - transform.position).sqrMagnitude > gravityRadius * gravityRadius)
                         continue;
                 }
                 other.attachedRigidbody.useGravity = false;
