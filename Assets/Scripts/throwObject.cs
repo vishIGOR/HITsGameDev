@@ -13,7 +13,7 @@ public class throwObject : MonoBehaviour
     public int maximumOfArtifacts;
 
     private Transform myTransform;
-    private int numOfArtifacts;
+    public int numOfArtifacts;
     private Text numOfArtifactsText;
     private float propulsionForce = 10;
 
