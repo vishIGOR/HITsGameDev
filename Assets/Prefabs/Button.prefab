@@ -578,7 +578,11 @@ MonoBehaviour:
     b: 0
   - a: 0
     b: 0
+<<<<<<< HEAD
   m_SelectedVertices: 00000000000000000000000000000000
+=======
+    m_SelectedVertices: 00000000000000000000000000000000
+>>>>>>> YL2
 --- !u!23 &4717069003860697455
 MeshRenderer:
   m_ObjectHideFlags: 0
