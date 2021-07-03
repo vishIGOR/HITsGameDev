@@ -7,6 +7,7 @@ public class PauseM : MonoBehaviour
 {
     static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject numOfArtifacts;
     public GameObject settingsMenuUI;
     PlayerControl contr;
     throwObject thr;
@@ -26,12 +27,14 @@ public class PauseM : MonoBehaviour
         {
             if (GameIsPaused)
             {
+                numOfArtifacts.SetActive(true);
                 pauseMenuUI.SetActive(false);
                 Time.timeScale = 1f;
                 Resume();
             }
             else
             {
+                numOfArtifacts.SetActive(false);
                 pauseMenuUI.SetActive(true);
                 Time.timeScale = 0f;
                 Pause();
@@ -63,6 +66,7 @@ public class PauseM : MonoBehaviour
     }
     public void ContinueGame()
     {
+        numOfArtifacts.SetActive(true);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         contr.enabled = true;
