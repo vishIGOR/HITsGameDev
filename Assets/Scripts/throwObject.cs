@@ -1,63 +1,67 @@
 using System.Collections;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class throwObject : MonoBehaviour
 {
     public GameObject objectPrefab;
-    public GameObject message;
-
-    public int maximumOfArtifacts;
+    public int numberOfArtifacts = 2;
 
     private Transform myTransform;
-    public int numOfArtifacts;
-    private Text numOfArtifactsText;
     private float propulsionForce = 10;
+
+    private GameObject[] artifacts;
+
+    private bool[] isArtifactSetted;
 
     // Start is called before the first frame update
     void Start()
     {
-        numOfArtifactsText = GameObject.Find("NumOfArtifacts").GetComponent<Text>();
-        numOfArtifactsText.text = maximumOfArtifacts.ToString();
+        artifacts = new GameObject[numberOfArtifacts];
+        isArtifactSetted = new bool[numberOfArtifacts];
+
+        for (int i = 0; i < numberOfArtifacts; ++i)
+        {
+            isArtifactSetted[i] = false;
+        }
         SetInitialReference();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            numOfArtifacts = Convert.ToInt32(numOfArtifactsText.text);
-            if (numOfArtifacts != 0)
-            {
-                SpawnObject();
-                numOfArtifacts--;
-                numOfArtifactsText.text = numOfArtifacts.ToString();
-            }
-            else
-            {
-                StartCoroutine(OnCollisionCoroutine());
-            }
+            SpawnObject(0);
         }
-    }
-    IEnumerator OnCollisionCoroutine()
-    {
-        message.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        message.SetActive(false);
-
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SpawnObject(1);
+        }
     }
     void SetInitialReference()
     {
         myTransform = transform;
     }
-    void SpawnObject()
+    void SpawnObject(int currentNumber)
     {
-        GameObject go = (GameObject)Instantiate(objectPrefab, myTransform.TransformPoint(0, 0, 0.5f), myTransform.rotation);
-        go.GetComponent<Rigidbody>().AddForce(myTransform.forward * propulsionForce, ForceMode.VelocityChange);
+        /* GameObject go = (GameObject)Instantiate(objectPrefab, myTransform.TransformPoint(0, 0, 0.5f), myTransform.rotation);
+         go.GetComponent<Rigidbody>().AddForce(myTransform.forward * propulsionForce, ForceMode.VelocityChange);*/
+
+        if (isArtifactSetted[currentNumber] == false)
+        {
+
+            artifacts[currentNumber] = (GameObject)Instantiate(objectPrefab, myTransform.TransformPoint(0, 0, 0.5f), myTransform.rotation);
+            artifacts[currentNumber].GetComponent<Rigidbody>().AddForce(myTransform.forward * propulsionForce, ForceMode.VelocityChange);
+
+            isArtifactSetted[currentNumber] = true;
+        }
+        else
+        {
+            Destroy(artifacts[currentNumber]);
+
+            isArtifactSetted[currentNumber] = false;
+        }
     }
 }
 
