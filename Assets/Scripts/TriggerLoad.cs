@@ -18,7 +18,9 @@ public class TriggerLoad : MonoBehaviour
     }
     void OnTriggerEnter(Collider col){
         if (col.tag == "Player"){
+            Cursor.visible = true;
             Application.LoadLevel(Level); 
         }
+
     }
 }

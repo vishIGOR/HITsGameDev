@@ -7,26 +7,17 @@ using UnityEngine.UI;
 public class GDATrigger : MonoBehaviour
 {
     public GameObject GDAModel;
+    public GameObject GDAModel2;
     public GameObject Learn;
-    public GameObject num0;
-    public GameObject num1;
-    Text numOfMaxArtText;
     public GameObject PressU;
-    void Start()
-    {
-        numOfMaxArtText = num1.GetComponent<Text>();
-        numOfMaxArtText.enabled = false;
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
             Cursor.visible = true;
-            numOfMaxArtText.enabled = true;
-            num0.SetActive(false);
             PressU.SetActive(false);
             Destroy(GDAModel);
+            Destroy(GDAModel2);
             Learn.SetActive(true);
 
         }
@@ -45,5 +36,12 @@ public class GDATrigger : MonoBehaviour
             PressU.SetActive(false);
         }
     }
+
+    public void Close()
+    {
+        Learn.SetActive(false);
+        Cursor.visible = false;
+    }
+
 
 }
